@@ -30,6 +30,10 @@ int main()
 		X += DX[DirNum];
 		Y += DY[DirNum];
 		Alphabet = Alphabet + 1;
+		if (Alphabet > 90)
+		{
+			Alphabet = 'A';
+		}
 		Answer[X][Y] = Alphabet;
 	}
 
