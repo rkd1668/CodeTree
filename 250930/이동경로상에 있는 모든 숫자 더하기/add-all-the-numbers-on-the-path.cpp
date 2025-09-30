@@ -3,7 +3,7 @@ using namespace std;
 
 int N, T, Answer;
 int Map[99][99];
-int DX[4] = {0, 1, 0, -1}, DY[4] = {1, 0, -1, 1};
+int DX[4] = {0, 1, 0, -1}, DY[4] = {1, 0, -1, 0};
 int DirNum = 3;
 char Directions[100000];
 
