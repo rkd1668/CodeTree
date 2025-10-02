@@ -18,7 +18,7 @@ int main() {
     char end = grid[R - 1][C - 1];
     int ans = 0;
     for(int i = 1; i < R - 2; i++) {
-        for(int j = 0; j < C - 2; j++) {
+        for(int j = 1; j < C - 2; j++) {
             for(int k = i + 1; k < R - 1; k++) {
                 for(int l = j + 1; l < C - 1; l++) {
                     if(grid[i][j] != start && grid[k][l] != grid[i][j] && grid[k][l] != end) {
