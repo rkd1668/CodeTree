@@ -16,7 +16,7 @@ int main() {
     for(int i = 0; i < n; i++) {
         int dist = 0;
         for(int j = 1; j < n; j++) {
-            int room_number = (i + j) % 5;
+            int room_number = (i + j) % n;
             dist += a[room_number] * j;
         }
         if(ans > dist) ans = dist;
