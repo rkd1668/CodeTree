@@ -21,7 +21,7 @@ int main() {
     }
 
     // Please write your code here.
-    int ans = 0;
+    int ans = -1;
 
     for(int i = 0; i < n - 2; i++) {
         for(int j = i + 1; j < n - 1; j++) {
