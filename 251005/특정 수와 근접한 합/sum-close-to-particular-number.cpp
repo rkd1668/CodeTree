@@ -25,7 +25,8 @@ int main() {
             for(int k = 0; k < N; k++) {
                 sum += arr[k];
             }
-
+            arr[i] = temp1;
+            arr[j] = temp2;
             if(ans > abs(S - sum)) ans = abs(S - sum);
         }
     }
