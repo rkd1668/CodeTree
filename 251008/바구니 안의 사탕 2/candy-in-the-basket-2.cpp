@@ -18,12 +18,19 @@ int main() {
         arr[pos[i]] += candy[i];
     }
     int ans = 0;
-    for(int i = K; i <= 100 - K; i++) {
-        int sum = 0;
-        for(int j = 0; j < 2 * K + 1; j++) {
-            sum += arr[i - K + j];
-        }
+    if(K <= 50) {
+        for(int i = K; i <= 100 - K; i++) {
+            int sum = 0;
+            for(int j = 0; j < 2 * K + 1; j++) {
+                sum += arr[i - K + j];
+            }
         if(ans < sum) ans = sum;
+        }
+    }
+    else {
+        for(int i = 0; i <= 100; i++) {
+            ans += arr[i];
+        }
     }
 
     cout << ans;
