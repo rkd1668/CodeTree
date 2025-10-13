@@ -23,7 +23,7 @@ int main() {
     for(int i = 0; i < 101; i++) {
         for(int j = i; j < 101; j++) {
             int Gcnt = 0, Hcnt = 0;
-            if(arr[i] == 'H' && arr[j] == 'H') {
+            if(arr[i] != 0 && arr[j] != 0) {
                 for(int k = i; k <= j; k++) {
                     if(arr[k] == 'G') Gcnt++;
                     else if(arr[k] == 'H') Hcnt++;
