@@ -14,6 +14,7 @@ int main() {
     for(int i = 1; i <= 9; i++) {
         for(int j = 1; j <= 9; j++) {
             for(int k = 1; k <= 9; k++) {
+                if(i == j || j == k || k == i) continue;
                 for(int l = 0; l < n; l++) {
                     int cnt_b = 0, cnt_c = 0;
                     int one_number = a[l] % 10;
