@@ -19,6 +19,9 @@ int main() {
             ans++;
             i += m * 2 + 1;
         }
+        else {
+            i++;
+        }
     }
     
     cout << ans;
