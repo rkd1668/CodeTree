@@ -23,7 +23,7 @@ bool InRange(int x, int y) {
 }
 
 bool CanGo(int x, int y) {
-    if(!InRange) return false;
+    if(!InRange(x, y)) return false;
     if(visited[x][y] || a[x][y] == 0) return false;
     return true;
 }
