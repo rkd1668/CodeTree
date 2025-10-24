@@ -31,7 +31,7 @@ int main() {
             it++;
         }
         else if(command == 'D' && it != s.end()) {
-            s.erase(it);
+            it = s.erase(it);
         }
         else if (command == 'P') {
             char c;
