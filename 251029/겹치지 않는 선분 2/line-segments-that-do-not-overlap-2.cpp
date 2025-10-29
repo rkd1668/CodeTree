@@ -32,7 +32,11 @@ int main() {
         }
         if(!is_cross) ans++;
     }
-
-    cout << ans;
+    if(n == 1) {
+        cout << 1;
+    }
+    else {
+        cout << ans;
+    }
     return 0;
 }
