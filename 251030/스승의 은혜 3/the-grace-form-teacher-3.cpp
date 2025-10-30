@@ -27,10 +27,10 @@ int main() {
         sort(temp_v.begin(), temp_v.end(), cmp);
 
         int sum = 0;
-        for(int i = 0; i < n; i++) {
-            sum += temp_v[i][0] + temp_v[i][1];
-            if(sum > b && ans < i) {
-                ans = i;
+        for(int j = 0; j < n; j++) {
+            sum += temp_v[j][0] + temp_v[j][1];
+            if(sum > b) {
+                if(ans < j) ans = j;
                 break;
             }
         }
