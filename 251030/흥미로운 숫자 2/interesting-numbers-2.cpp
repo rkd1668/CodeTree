@@ -11,7 +11,7 @@ int main() {
 
     int ans = 0;
     for(int i = x; i <= y; i++) {
-        int cnt = 0;
+        int cnt1 = 0, cnt2 = 0;
         int number = i;
         vector<int> v;
         while(number > 0) {
@@ -21,11 +21,14 @@ int main() {
         }
         
         sort(v.begin(), v.end());
-        for(int i = 1; i < v.size(); i++) {
-            if(v[i - 1] != v[i]) cnt++;
+        for(int i = 0; i < v.size(); i++) {
+            int min = v[0];
+            int max = v[v.size() - 1];
+            if(min != v[i]) cnt1++;
+            if(max != v[i]) cnt2++;
         }
 
-        if(cnt == 1) ans++;
+        if(cnt1 == 1 || cnt2 == 1) ans++;
     }
     
     cout << ans;
