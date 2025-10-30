@@ -4,6 +4,9 @@
 
 using namespace std;
 
+bool cmp(vector<int> v1, vector<int> v2) {
+    return (v1[0] + v1[1]) < (v2[0] + v2[1]);
+}
 int main() {
     // Please write your code here.
     int n, b;
@@ -14,21 +17,25 @@ int main() {
         cin >> v[i][0] >> v[i][1];
     }
 
-    sort(v.begin(), v.end());
-
     int ans = 0;
-    int sum = 0;
 
-    for(auto a : v) {
-        int temp_sum = sum;
-        temp_sum += (a[0] / 2) + a[1];
-        if(temp_sum < b) {
-            ans++;
-            sum += a[0] + a[1];
+
+    for(int i = 0; i < n; i++) {
+        vector<vector<int>> temp_v = v;
+        temp_v[i][0] /= 2;
+
+        sort(temp_v.begin(), temp_v.end(), cmp);
+
+        int sum = 0;
+        for(int i = 0; i < n; i++) {
+            sum += temp_v[i][0] + temp_v[i][1];
+            if(sum > b && ans < i) {
+                ans = i;
+                break;
+            }
         }
-        else break;
     }
-
+    
     cout << ans;
     return 0;
 }
