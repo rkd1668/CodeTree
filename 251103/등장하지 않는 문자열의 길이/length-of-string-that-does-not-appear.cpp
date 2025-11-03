@@ -7,16 +7,17 @@ int main() {
     // Please write your code here.
     int n;
     string str1;
-    vector<char> str(n);
     cin >> n;
+    vector<char> str(n);
     cin >> str1;
+    
     for(int i = 0; i < n; i++) {
         str[i] = str1[i];
     }
 
     int ans = 0;
     bool check = false;
-    for(int i = 1; i <= n / 2; i++) {
+    for(int i = 1; i <= (n / 2) + 1; i++) {
         if(!check) {
             for(int j = 0; j <= n - i; j++) {
                 vector<char> sub(i);
