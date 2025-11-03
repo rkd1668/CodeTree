@@ -17,7 +17,7 @@ int main() {
 
     int ans = 0;
     bool check = false;
-    for(int i = 1; i <= (n / 2) + 1; i++) {
+    for(int i = 1; i <= n; i++) {
         if(!check) {
             for(int j = 0; j <= n - i; j++) {
                 vector<char> sub(i);
