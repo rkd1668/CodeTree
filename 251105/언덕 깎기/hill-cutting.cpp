@@ -24,8 +24,15 @@ int main() {
     else {
         for(int i = 0; i <= end - 17 - start; i++) {
             int cost = 0;
-            int j = end - 17 - start - i;
-            cost = i * i + j * j;
+            int dist = end - 17 - start - i;
+            for(int j = 0; j < n; j++) {
+                if(h[j] < start + i) {
+                    cost += (start + i - h[j]) * (start + i - h[j]); 
+                }
+                else if(h[j] > end - dist) {
+                    cost += (h[j] - (end - dist)) * (h[j] - (end - dist));
+                }
+            }
             if(ans > cost) ans = cost;
         }
     }
