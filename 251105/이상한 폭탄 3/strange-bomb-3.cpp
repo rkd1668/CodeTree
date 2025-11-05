@@ -34,7 +34,7 @@ int main() {
     int ans = 0;
     int max_exp = 0;
     for(int i = 0; i < explosion.size(); i++) {
-        if(max_exp <= explosion[i]) {
+        if(max_exp <= explosion[i] && explosion[i] != 0) {
             max_exp = explosion[i];
             ans = i;
         }
