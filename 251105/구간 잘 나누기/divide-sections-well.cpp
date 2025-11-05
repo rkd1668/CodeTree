@@ -19,7 +19,7 @@ int main() {
     }
 
     int ans = 0;
-    for(int i = max_value + 1; i < 10000; i++) {
+    for(int i = max_value; i < 10000; i++) {
         int cnt = 0;
         int sum = 0;
         for(int j = 0; j < n; j++) {
@@ -31,7 +31,7 @@ int main() {
                 sum += v[j];
             }
         }
-        if(cnt == m - 1) {
+        if(cnt <= m - 1) {
             ans = i;
             break;
         }
