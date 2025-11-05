@@ -14,13 +14,17 @@ int main() {
 
     vector<int> ans(n);
     
-    for(int i = 1; i <= 1000; i++) {
+    for(int i = 1; i <= n; i++) {
         vector<int> check_v(n);
         check_v[i - 1] = 1;
         bool check = true;
         int number = i;
         for(int j = 0; j < n - 1; j++) {
             number = v[j] - number;
+            if(number > n || number < 1) {
+                check = false;
+                break;
+            }
             if(check_v[number - 1] == 0) {
                 check_v[number - 1] = 1;
                 continue;
