@@ -17,23 +17,30 @@ int main() {
     sort(v.begin(), v.end());
 
     int ans = INT_MAX;
-    int dist = v[n - 1] - v[0];
-
     for(int i = v[0]; i <= v[n - 1]; i++) {
-        for(int j = v[n - 1]; j >= i; j--) {
-            if(j - i > k) continue;
-            int cost = 0;
-            for(int k = 0; k < n; k++) {
-                if(v[k] < i) {
-                    cost += i - v[k];
-                }
-                else if(v[k] > j) {
-                    cost += v[k] - j;
+        int cost = 0;
+        if(v[n - 1] - i <= k) {
+            for(int j = 0; j < n; j++) {
+                if(v[j] < i) {
+                    cost += i - v[j];
                 }
             }
-            if(cost < ans) ans = cost;
         }
+        else {
+            int max_num = i + k;
+            for(int j = 0; j < n; j++) {
+                if(v[j] < i) {
+                    cost += i - v[j];
+                }
+                else if(v[j] > max_num) {
+                    cost += v[j] - max_num;
+                }
+            }
+        }
+
+        if(ans > cost) ans = cost;
     }
+
     cout << ans;
     return 0;
 
