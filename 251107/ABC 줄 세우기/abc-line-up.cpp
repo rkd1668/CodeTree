@@ -17,9 +17,7 @@ int main() {
         bool check2 = true;
         for(int i = 0; i < n - 1; i++) {
             if(a[i] > a[i + 1]) {
-                char temp = a[i];
-                a[i] = a[i + 1];
-                a[i + 1] = temp;
+                swap(a[i], a[i + 1]);
                 ans++;
                 check2 = false;
             }
