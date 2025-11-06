@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 int main() {
@@ -11,19 +12,10 @@ int main() {
         cin >> x1[i] >> x2[i];
     }
 
-    vector<int> check(101);
-    for(int i = 0; i < n; i++) {
-        for(int j = x1[i]; j <= x2[i]; j++) {
-            check[j]++;
-        }
-    }
+    sort(x1.begin(), x1.end());
+    sort(x2.begin(), x2.end());
 
-    bool yes = false;
-    for(int i = 0; i < 101; i++) {
-        if(check[i] >= n) yes = true;
-    }
-
-    if(yes) cout << "Yes";
-    else cout << "No";
+    if(x1[n - 1] > x2[0]) cout << "No";
+    else cout << "Yes";
     return 0;
 }
