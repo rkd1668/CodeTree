@@ -19,10 +19,9 @@ int main() {
     for(int i = 0; i < n; i++) {
         check[i] = c + i;
     }
-
     if(count[p - 1] > 0) {
         for(int i = p - 2; i >= 0; i--) {
-            if(count[p - 1] == i) {
+            if(count[p - 1] == count[i]) {
                 for(int j = 0; j < n; j++) {
                     if(name[i] == check[j]) {
                         check[j] = 0;
