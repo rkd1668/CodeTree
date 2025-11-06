@@ -21,6 +21,15 @@ int main() {
     }
 
     if(count[p - 1] > 0) {
+        for(int i = p - 2; i >= 0; i--) {
+            if(count[p - 1] == i) {
+                for(int j = 0; j < n; j++) {
+                    if(name[i] == check[j]) {
+                        check[j] = 0;
+                    }
+                }
+            }
+        }
         for(int i = p - 1; i < m; i++) {
             for(int j = 0; j < n; j++) {
                 if(name[i] == check[j]) {
