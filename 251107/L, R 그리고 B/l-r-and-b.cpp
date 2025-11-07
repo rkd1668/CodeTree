@@ -24,7 +24,7 @@ int main() {
     }
 
     int ans = 0;
-    if((bx == rx && rx && lx) || (by == ry && ry == ly)) {
+    if((bx == rx && rx == lx && (by - ry) * (ly - ry) < 0) || (by == ry && ry == ly && (bx - rx) * (lx - rx) < 0)) {
         ans = abs(bx - lx) + abs(by - ly) - 1 + 2;
     }
     else {
