@@ -15,12 +15,12 @@ int main() {
     }
 
     int ans = 0;
-   
     while(odd - even >= 3) {
         odd -= 2;
         even++;
     }
-    if(even == odd) ans = n;
+    
+    if(even == odd) ans = even * 2;
     else if(even > odd) {
         ans = odd * 2 + 1;
     }
