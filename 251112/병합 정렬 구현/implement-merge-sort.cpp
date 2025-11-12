@@ -28,7 +28,9 @@ void Merge(vector<int> &v, int low, int mid, int high) {
         j++;
     }
 
-    v = merged_arr;
+    for (int k = 0; k < merged_arr.size(); k++) {
+        v[low + k] = merged_arr[k];
+    }
 }
 
 void MergeSort(vector<int> &v, int low, int high) {
