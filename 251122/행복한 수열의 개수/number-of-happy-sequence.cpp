@@ -16,8 +16,8 @@ int main() {
     int ans = 0;
     for(int i = 0; i < n; i++) {
         int cnt1 = 1, cnt2 = 1;
-        for(int j = 1; j < n; j++) {
-            if(v[i][j] == v[i][j - 1]) cnt1++;
+        for(int j = 0; j < n; j++) {
+            if(j - 1 >= 0 && v[i][j] == v[i][j - 1]) cnt1++;
             else cnt1 = 1;
             if(cnt1 >= m) {
                 ans++;
@@ -25,8 +25,8 @@ int main() {
             }
         }
 
-        for(int j = 1; j < n; j++) {
-            if(v[j][i] == v[j - 1][i]) cnt2++;
+        for(int j = 0; j < n; j++) {
+            if(j - 1 >= 0 &&v[j][i] == v[j - 1][i]) cnt2++;
             else cnt2 = 1;
             if(cnt2 >= m) {
                 ans++;
