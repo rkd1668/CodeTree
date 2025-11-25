@@ -22,7 +22,7 @@ int GetRunLength(string a) {
         }
     }
     cnt += 2;
-    if(check) cnt++;
+    if(check && a.size() == 10) cnt++;
     return cnt;
 }
 
