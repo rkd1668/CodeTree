@@ -16,9 +16,8 @@ int main() {
         bool check = true;
         int cnt = 1;
         int start = 0, end = 0;
-        if(arr.size() == 0) break;
-        for(int i = 0; i < arr.size() - 1; i++) {
-            if(arr[i] == arr[i + 1]) {
+        for(int i = 0; i < arr.size(); i++) {
+            if(i < arr.size() && arr[i] == arr[i + 1]) {
                 cnt++;
                 end = i + 1;
             }
