@@ -49,19 +49,16 @@ int main() {
                     }
                 }
             }
-            
+
             int cnt = 0;
             for(int i = 0; i < n; i++) {
                 for(int j = 0; j < n; j++) {
                     if(temp[i][j] == 0) continue;
                     if(InRange(i, j + 1, n) && temp[i][j] == temp[i][j + 1]) {
-                        if(InRange(i, j + 2, n) && temp[i][j + 2] == temp[i][j]) continue;
-                        if(InRange(i, j - 1, n) && temp[i][j - 1] == temp[i][j]) continue;
                         cnt++;
                     }
                     if(InRange(i + 1, j, n) && temp[i][j] == temp[i + 1][j]) {
-                        if(InRange(i + 2, j, n) && temp[i + 2][j] == temp[i][j]) continue;
-                        if(InRange(i - 1, j, n) && temp[i - 1][j] == temp[i][j]) continue;
+                        bool check = true;
                         cnt++;
                     }
                 }
