@@ -40,13 +40,13 @@ void Bomb(vector<vector<int>> &grid, int n, int m) {
                     cnt++;
                     end = i + 1;
                 }
-                if(n == 1 && grid[i][j] != grid[i + 1][j] || i == n - 2) {
+                if(i == n - 1 || grid[i][j] != grid[i + 1][j] || i == n - 2) {
                     if(cnt >= m) {
                         for(int k = start; k <= end; k++) {
                             grid[k][j] = 0;
                         }
                         check = false;
-                        //if(n == 1) check = true;
+                        if(n == 1) check = true;
                     }
                     cnt = 1;
                     start = i + 1;
