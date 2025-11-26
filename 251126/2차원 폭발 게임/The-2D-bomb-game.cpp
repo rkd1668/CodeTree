@@ -71,19 +71,33 @@ int main() {
         }
     }
     
+    int cnt = 0;
+    int num = -1;
     for(int i = 0; i < k; i++) {
         Bomb(grid, n, m);
         Rotate(grid, n);
+        int temp_num = 0;
+        for(int i = 0; i < n; i++) {
+            for(int j = 0; j < n; j++) {
+                if(grid[i][j] != 0) temp_num;
+            }
+        }
+        if(num !=  temp_num) {
+            num = temp_num;
+            cnt = 1;
+        }
+        else cnt++;
+        if(cnt == 10) break;
     }
 
     Bomb(grid, n, m);
     int ans = 0;
+    
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
             if(grid[i][j] != 0) ans++;
         }
     }
-
     cout << ans;
     return 0;
 }
