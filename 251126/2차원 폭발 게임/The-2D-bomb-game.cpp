@@ -4,98 +4,99 @@ using namespace std;
 
 
 void Fall(vector<vector<int>> &grid, int n) {
-    vector<vector<int>> temp(n, vector<int>(n));
-    for(int j = 0; j < n; j++) {
-        int temp_r = n - 1;
-        for(int i = n - 1; i >= 0; i--) {
-            if(grid[i][j] != 0) {
-                temp[temp_r][j] = grid[i][j];
-                temp_r--;
+    // 각 열별로 아래로 떨어뜨리기 (in-place)
+    for (int j = 0; j < n; ++j) {
+        int write = n - 1; // 내려갈 위치
+        for (int i = n - 1; i >= 0; --i) {
+            if (grid[i][j] != 0) {
+                grid[write][j] = grid[i][j];
+                if (write != i) grid[i][j] = 0;
+                --write;
+            }
+        }
+        // 위 쪽 나머지는 0으로 채우기
+        while (write >= 0) {
+            grid[write][j] = 0;
+            --write;
+        }
+    }
+}
+
+// 한 번의 폭발 라운드: 폭발이 있었으면 true 리턴
+bool BombOnce(vector<vector<int>> &grid, int n, int m) {
+    bool exploded = false;
+
+    for (int j = 0; j < n; ++j) {
+        int i = 0;
+        while (i < n) {
+            if (grid[i][j] == 0) {
+                ++i;
+                continue;
+            }
+            int v = grid[i][j];
+            int start = i;
+            while (i < n && grid[i][j] == v) ++i;
+            int len = i - start;
+            if (len >= m) {
+                exploded = true;
+                for (int r = start; r < i; ++r) {
+                    grid[r][j] = 0;
+                }
             }
         }
     }
-    grid = temp;
+
+    if (exploded) {
+        Fall(grid, n);
+    }
+    return exploded;
 }
 
-void Rotate(vector<vector<int>> &grid, int n) {
-    vector<vector<int>> temp(n, vector<int>(n));
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            temp[i][j] = grid[n - 1 - j][i];
+// 더 이상 터질 게 없을 때까지 BombOnce 반복
+void BombAll(vector<vector<int>> &grid, int n, int m) {
+    while (BombOnce(grid, n, m)) {
+        // 계속 폭발이 이어질 때까지 반복
+    }
+}
+
+void Rotate(vector<vector<int>> &grid, vector<vector<int>> &tmp, int n) {
+    // tmp 재사용 (새로 만들지 않음)
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            tmp[i][j] = grid[n - 1 - j][i];
         }
     }
-    grid = temp;
+    grid.swap(tmp);
     Fall(grid, n);
 }
 
-void Bomb(vector<vector<int>> &grid, int n, int m) {
-    for(int j = 0; j < n; j++) {
-        bool explosion = true;
-        while(explosion) {
-            bool check = true;
-            int cnt = 1;
-            int start = 0, end = 0;
-            for(int i = 0; i < n ; i++) {
-                if(i != n - 1 && grid[i][j] == grid[i + 1][j] && grid[i][j] != 0) {
-                    cnt++;
-                    end = i + 1;
-                }
-                if(i == n - 1 || grid[i][j] != grid[i + 1][j] || i == n - 2) {
-                    if(cnt >= m) {
-                        for(int k = start; k <= end; k++) {
-                            grid[k][j] = 0;
-                        }
-                        check = false;
-                        if(n == 1) check = true;
-                    }
-                    cnt = 1;
-                    start = i + 1;
-                    end = i + 1;
-                }
-            }
-            Fall(grid, n);
-            if(check) explosion = false;
-        }
-    }
-}
-
-
 int main() {
-    // Please write your code here.
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
     int n, m, k;
     cin >> n >> m >> k;
     vector<vector<int>> grid(n, vector<int>(n));
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
             cin >> grid[i][j];
         }
     }
-    
-    int cnt = 0;
-    int num = -1;
-    for(int i = 0; i < k; i++) {
-        Bomb(grid, n, m);
-        Rotate(grid, n);
-        int temp_num = 0;
-        for(int i = 0; i < n; i++) {
-            for(int j = 0; j < n; j++) {
-                if(grid[i][j] != 0) temp_num;
-            }
-        }
-        if(num !=  temp_num) {
-            num = temp_num;
-            cnt = 1;
-        }
-        else cnt++;
-        if(cnt == 10) break;
+
+    // Rotate에서 쓸 임시 배열 하나만 만들어서 계속 재사용
+    vector<vector<int>> tmp(n, vector<int>(n));
+
+    for (int t = 0; t < k; ++t) {
+        BombAll(grid, n, m);       // 완전히 안정될 때까지 폭발
+        Rotate(grid, tmp, n);      // 회전 + 낙하
     }
 
-    Bomb(grid, n, m);
+    BombAll(grid, n, m);           // 마지막에 한 번 더 폭발 처리
+
     int ans = 0;
-    
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            if(grid[i][j] != 0) ans++;
+    for (int i = 0; i < n; ++i) {
+        for (int j = 0; j < n; ++j) {
+            if (grid[i][j] != 0) ++ans;
         }
     }
     cout << ans;
