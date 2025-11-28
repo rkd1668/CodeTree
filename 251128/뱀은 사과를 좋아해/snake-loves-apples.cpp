@@ -1,8 +1,9 @@
 #include <iostream>
 #include <vector>
+#include <deque>
 using namespace std;
 
-int dx[4] = {-1, 1, 0, 0};
+int dx[4] = {-1, 1, 0, 0}; // U, D, R, L
 int dy[4] = {0, 0, 1, -1};
 
 bool InRange(int x, int y, int n) {
@@ -10,61 +11,68 @@ bool InRange(int x, int y, int n) {
 }
 
 int main() {
-    // Please wrie your code here.
+
     int n, m, k;
     cin >> n >> m >> k;
-    vector<vector<int>> grid(n, vector<int>(n));
+
+    vector<vector<int>> apple(n, vector<int>(n, 0));
     for(int i = 0; i < m; i++) {
         int x, y;
         cin >> x >> y;
-        grid[x - 1][y - 1] = 1;
+        apple[x - 1][y - 1] = 1;
     }
-    vector<pair<int, int>> snake;
-    snake.push_back(make_pair(0, 0));
+
+    vector<vector<bool>> snake_exist(n, vector<bool>(n, false));
+
+    deque<pair<int,int>> snake;
+    snake.push_back({0, 0});
+    snake_exist[0][0] = true;
 
     int ans = 0;
+
     for(int i = 0; i < k; i++) {
         char d;
         int p;
-        int dir = 0;
         cin >> d >> p;
+
+        int dir;
         if(d == 'U') dir = 0;
         else if(d == 'D') dir = 1;
         else if(d == 'R') dir = 2;
-        else dir = 3;
+        else dir = 3; // 'L'
 
-        bool check = true;
-        for(int j = 0; j < p; j++) {
-            int next_x = snake[0].first + dx[dir];
-            int next_y = snake[0].second + dy[dir];
-            int tail_x = snake[snake.size() - 1].first;
-            int tail_y = snake[snake.size() - 1].second;
+        for(int step = 0; step < p; step++) {
+            auto head = snake.front();
+            int nx = head.first + dx[dir];
+            int ny = head.second + dy[dir];
 
             ans++;
-            if(!InRange(next_x, next_y, n)) {
-                check = false;
-                break;
+
+            if(!InRange(nx, ny, n)) {
+                cout << ans;
+                return 0;
             }
 
-            for(int l = snake.size() - 1; l > 0; l--) {
-                snake[l] = make_pair(snake[l - 1].first, snake[l - 1].second);
-            }
-            snake[0] = make_pair(next_x, next_y);
+            bool grow = (apple[nx][ny] == 1);
+            auto tail = snake.back();
 
-            if(grid[snake[0].first][snake[0].second] == 1) {
-                snake.push_back(make_pair(tail_x, tail_y));
-                grid[snake[0].first][snake[0].second] = 0;
-            }
-            for(int l = 1; l < snake.size(); l++) {
-                if(snake[0] == snake[l]) {
-                    check = false;
-                    break;
+            if(snake_exist[nx][ny]) {
+                if(!(nx == tail.first && ny == tail.second && !grow)) {
+                    cout << ans;
+                    return 0;
                 }
             }
-            
-        }
 
-        if(!check) break;
+            snake.push_front({nx, ny});
+            snake_exist[nx][ny] = true;
+
+            if(grow) {
+                apple[nx][ny] = 0;
+            } else {
+                snake_exist[tail.first][tail.second] = false;
+                snake.pop_back();
+            }
+        }
     }
 
     cout << ans;
