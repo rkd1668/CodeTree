@@ -51,16 +51,17 @@ int main() {
             }
             snake[0] = make_pair(next_x, next_y);
 
+            if(grid[snake[0].first][snake[0].second] == 1) {
+                snake.push_back(make_pair(tail_x, tail_y));
+                grid[snake[0].first][snake[0].second] = 0;
+            }
             for(int l = 1; l < snake.size(); l++) {
                 if(snake[0] == snake[l]) {
                     check = false;
                     break;
                 }
             }
-            if(grid[snake[0].first][snake[0].second] == 1) {
-                snake.push_back(make_pair(tail_x, tail_y));
-                grid[snake[0].first][snake[0].second] = 0;
-            }
+            
         }
 
         if(!check) break;
