@@ -59,6 +59,7 @@ int main() {
             }
             if(grid[snake[0].first][snake[0].second] == 1) {
                 snake.push_back(make_pair(tail_x, tail_y));
+                grid[snake[0].first][snake[0].second] = 0;
             }
         }
 
