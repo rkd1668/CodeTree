@@ -42,8 +42,8 @@ int main() {
 
     int ans = 0;
     for(int d = 0; d < 4; d++) {
-        int dir = d;
         for(int p = 0; p < n; p++) {
+            int dir = d;
             int t = 1;
             int x, y;
             if(d == 0) {
