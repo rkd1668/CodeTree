@@ -15,7 +15,6 @@ void ChooseHorse(vector<int> input, vector<int> &arr, int cnt, int n, int m, int
     }
 
     for(int i = 1; i <= k; i++) {
-        if(arr[i - 1] > m - 1) continue;
         arr[i - 1] += input[cnt];
         ChooseHorse(input, arr, cnt + 1, n, m, k);
         arr[i - 1] -= input[cnt];
