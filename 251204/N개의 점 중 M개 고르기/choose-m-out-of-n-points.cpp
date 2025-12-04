@@ -11,16 +11,22 @@ vector<pair<int, int>> selected;
 
 void GetAnswer() {
     int dist = 0;
-    int x1, x2, y1, y2;
-    x1 = selected[0].first;
-    y1 = selected[0].second;
-    x2 = selected[1].first;
-    y2 = selected[1].second;
-    dist = abs(x1 - x2) * abs(x1 - x2) + abs(y1 - y2) * abs(y1 - y2);
+    for(int i = 0; i < m - 1; i++) {
+        for(int j = i + 1; j < m; j++) {
+            int temp_dist = 0;
+            int x1, x2, y1, y2;
+            x1 = selected[i].first;
+            y1 = selected[i].second;
+            x2 = selected[j].first;
+            y2 = selected[j].second;
+            temp_dist = abs(x1 - x2) * abs(x1 - x2) + abs(y1 - y2) * abs(y1 - y2);
+            if(temp_dist > dist) dist = temp_dist;
+        }
+    }
     if(ans > dist) ans = dist;
 }
 void Choose(int idx, int cnt) {
-    if(cnt == 2) {
+    if(cnt == m) {
         GetAnswer();
         return;
     }
