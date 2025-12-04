@@ -8,7 +8,7 @@ int ans = INT_MAX;
 vector<int> arr;
 
 void Move(int cnt, int x) {
-    if(x == arr.size() - 1) {
+    if(x >= arr.size() - 1) {
         if(ans > cnt) ans = cnt;
         return;
     }
@@ -30,6 +30,6 @@ int main() {
     Move(0, 0);
     if(ans == INT_MAX) cout << -1;
     else cout << ans;
-    
+
     return 0;
 }
