@@ -14,6 +14,7 @@ void DoXOR() {
     }
     if(ans < x) ans = x;
 }
+
 void Choose(int idx, int cnt) {
     if(cnt == m) {
         DoXOR();
@@ -22,7 +23,7 @@ void Choose(int idx, int cnt) {
 
     for(int i = idx + 1; i < n; i++) {
         selected.push_back(arr[i]);
-        Choose(i + 1, cnt + 1);
+        Choose(i, cnt + 1);
         selected.pop_back();
     }
 }
