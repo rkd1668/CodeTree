@@ -10,6 +10,7 @@ vector<int> selected_num;
 vector<int> cost;
 void Choose(int r, int cnt) {
     if(cnt == n - 1) {
+        if(graph[r][0] == 0) return;
         cost.push_back(graph[r][0]);
         int sum = 0;
         for(int i = 0; i < n; i++) {
