@@ -40,7 +40,7 @@ int main() {
         }
     }
 
-    int ans_k = 0;
+    int ans_k = 1;
     int ans_cnt = 0;
     for(int k = 1; k <= k_max; k++) {
         visited = vector<vector<int>>(n, vector<int>(m, 0));
