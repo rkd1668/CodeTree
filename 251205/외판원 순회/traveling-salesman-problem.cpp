@@ -21,7 +21,7 @@ void Choose(int r, int cnt) {
     }
 
     for(int i = 1; i < n; i++) {
-        if(selected_num[i] == 1) continue;
+        if(selected_num[i] == 1 || graph[r][i] == 0) continue;
 
         selected_num[i] = 1;
         cost.push_back(graph[r][i]);
