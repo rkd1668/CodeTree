@@ -21,13 +21,13 @@ bool CanGo(int x, int y, int num) {
 
 void DFS(int x, int y, int &cnt) {
     if(cnt == 4) ans_cnt++;
-
+    if(ans_size < cnt) ans_size = cnt;
     for(int i = 0; i < 4; i++) {
         int next_x = x + dx[i], next_y = y + dy[i];
         if(CanGo(next_x, next_y, grid[x][y])) {
             visited[next_x][next_y] = 1;
             cnt++;
-            if(ans_size < cnt) ans_size = cnt;
+            
             DFS(next_x, next_y, cnt);
         }
     }
