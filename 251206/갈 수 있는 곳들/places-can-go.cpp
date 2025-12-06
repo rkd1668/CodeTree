@@ -28,10 +28,10 @@ void BFS() {
 
         int x = curr_pos.first;
         int y = curr_pos.second;
-        visited[x][y] = 1;
         for(int i = 0; i < 4; i++) {
             int next_x = x + dx[i], next_y = y + dy[i];
             if(CanGo(next_x, next_y)) {
+                visited[next_x][next_y] = 1;
                 q.push(make_pair(next_x, next_y));
             }
         }
@@ -53,10 +53,12 @@ int main() {
         cin >> r >> c;
         r--;
         c--;
-        q.push(make_pair(r, c));
-        BFS();
+        if(InRange(r, c) && !visited[r][c]) {
+            visited[r][c] = 1;
+            q.push(make_pair(r, c));
+        }
     }
-
+    BFS();
     int ans = 0;
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
