@@ -1,12 +1,13 @@
 #include <iostream>
 #include <vector>
+#include <climits>
 #include <queue>
 using namespace std;
 
 int dx[8] = {-1, -2, -2, -1, 1, 2, 2, 1};
 int dy[8] = {-2, -1, 1, 2, 2, 1, -1, -2};
 int n, r1, c1, r2, c2;
-int ans;
+int ans = INT_MAX;
 
 int step[100][100], visited[100][100];
 queue<pair<int, int>> q;
@@ -55,6 +56,7 @@ int main() {
     c2--;
 
     BFS();
-    cout << ans;
+    if(ans == INT_MAX) cout << -1;
+    else cout << ans;
     return 0;
 }
