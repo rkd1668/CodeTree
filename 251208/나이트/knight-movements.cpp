@@ -33,15 +33,17 @@ void BFS() {
                 q.push({new_r, new_c});
                 step[new_r][new_c] = step[r][c] + 1;
 
-                if(visited[r2][c2] == 1) {
-                    ans = step[r2][c2];
-                    return;
-                }
+                
             }
         }
 
         
     }
+
+    if(visited[r2][c2] == 1) {
+                    ans = step[r2][c2];
+                    return;
+                }
 }
 
 
