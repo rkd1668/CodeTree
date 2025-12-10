@@ -5,7 +5,7 @@ using namespace std;
 
 int n;
 int grid[100][100];
-pair<int, int> dp[100][100];
+int dp[100][100][101];
 
 int main() {
     // Please write your code here.
@@ -18,36 +18,45 @@ int main() {
 
     for(int i = 0; i < n; i++) {
         for(int j = 0; j < n; j++) {
-            dp[i][j] = {grid[i][j], grid[i][j]};
-        }
-    }
-
-    dp[0][0] = {grid[0][0], grid[0][0]};
-    for(int i = 1; i < n; i++) {
-        dp[0][i] = {min(dp[0][i - 1].first, grid[0][i]), max(dp[0][i - 1].second, grid[0][i])};
-        dp[i][0] = {min(dp[i - 1][0].first, grid[i][0]), max(dp[i - 1][0].second, grid[i][0])};
-    }
-
-    for(int i = 1; i < n; i++) {
-        for(int j = 1; j < n; j++) {
-            int num1 = max(dp[i - 1][j].second, grid[i][j]) - min(dp[i - 1][j].first, grid[i][j]);
-            int num2 = max(dp[i][j - 1].second, grid[i][j]) - min(dp[i][j - 1].first, grid[i][j]);
-
-            if(num1 <= num2) {
-                dp[i][j] = {min(dp[i - 1][j].first, grid[i][j]), max(dp[i - 1][j].second, grid[i][j])};
-            }
-            else {
-                dp[i][j] = {min(dp[i][j - 1].first, grid[i][j]), max(dp[i][j - 1].second, grid[i][j])};
+            for(int k = 0; k <= 100; k++) {
+                dp[i][j][k] = INT_MAX;
             }
         }
     }
 
-    // for(int i = 0; i < n; i++) {
-    //     for(int j = 0; j < n; j++) {
-    //         cout << dp[i][j].first << dp[i][j].second << " ";
-    //     }
-    //     cout << endl;
-    // }
-    cout << dp[n - 1][n - 1].second - dp[n - 1][n - 1].first;
-    return 0;
+    int start = grid[0][0];
+
+    dp[0][0][start] = start;
+
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            if(i == 0 && j == 0) continue;
+
+            int val = grid[i][j];
+
+            for(int k = 1; k <= 100; k++) {
+                if(i > 0 && dp[i - 1][j][k] != INT_MAX) {
+                    int new_min = min(k, val);
+                    int new_max = max(dp[i - 1][j][k], val);
+                    dp[i][j][new_min] = min(dp[i][j][new_min], new_max);
+                }
+
+                if(j > 0 && dp[i][j - 1][k] != INT_MAX) {
+                    int new_min = min(k, val);
+                    int new_max = max(dp[i][j - 1][k], val);
+                    dp[i][j][new_min] = min(dp[i][j][new_min], new_max);
+                }
+            }
+        }
+    }
+
+
+    int ans = INT_MAX;
+
+    for(int k = 1; k <= 100; k++) {
+        if(dp[n - 1][n - 1][k] != INT_MAX) {
+            ans = min(ans, dp[n - 1][n - 1][k] - k);
+        }
+    }
+    cout << ans;
 }
