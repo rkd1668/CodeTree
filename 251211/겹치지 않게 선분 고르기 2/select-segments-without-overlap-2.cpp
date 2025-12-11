@@ -19,8 +19,10 @@ int main() {
 
     int ans = 1;
     int end = v[0].first;
+    //int start = v[0].second;
+    
     for(int i = 0; i < v.size(); i++) {
-        if(end < v[i].first) {
+        if(end < v[i].second) {
             end = v[i].first;
             ans++;
             continue;
