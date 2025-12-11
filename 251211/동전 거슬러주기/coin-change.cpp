@@ -21,9 +21,11 @@ int main() {
 
     for(int i = 1; i <= m; i++) {
         for(int j = 0; j < n; j++) {
-            if(dp[i - coin[j]] == INT_MAX) continue;
+            if(i >= coin[j]) {
+                if(dp[i - coin[j]] == INT_MAX) continue;
 
-            dp[i] = min(dp[i], dp[i - coin[j]] + 1);
+                dp[i] = min(dp[i], dp[i - coin[j]] + 1);
+            }
         }
     }
 
