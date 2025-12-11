@@ -8,10 +8,11 @@ int main() {
     int n;
     cin >> n;
     int arr[1000] = {0};
-    int dp[1000] = {1};
+    int dp[1000];
 
     for(int i = 0; i < n; i++) {
         cin >> arr[i];
+        dp[i] = 1;
     }
 
     for(int i = 1; i < n; i++) {
